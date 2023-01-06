@@ -17,11 +17,10 @@ MANUAL_ERR_MSG = "签到失败，请从浏览器手动签到一次，并更新Co
 
 
 class SMZDM_Bot(object):
-
     DEFAULT_HEADERS = {
         "Accept": "*/*",
         "Accept-Encoding": "gzip, deflate, br",
-        "Accept-Language": "zh-CN,zh;q=0.9",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6",
         "Connection": "keep-alive",
         "Host": "zhiyou.smzdm.com",
         "Referer": "https://www.smzdm.com/",
@@ -61,7 +60,7 @@ class SMZDM_Bot(object):
             tb.field_names = ["签到天数", "连续签到", "金币", "积分", "经验", "等级", "补签卡"]
             tb.add_row([checkin_num, days_of_week, gold, point, exp, rank, cards])
             logger.info(f"\n{tb}")
-            msg = f"""\n
+            msg = f"""
             ⭐签到成功{checkin_num}天\n
             🏅金币{gold}\n
             🏅积分{point}\n
@@ -70,8 +69,8 @@ class SMZDM_Bot(object):
             🏅补签卡{cards}"""
             return msg
         else:
-            logger.error("Faile to sign in, 签到失败")
-            return MANUAL_ERR_MSG
+            logger.error("Faile to sign in, 签到失败" + MANUAL_ERR_MSG)
+            msg = "Faile to sign in, 签到失败" + MANUAL_ERR_MSG
 
 
 def main():
